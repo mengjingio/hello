@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOSGods游戏插件使用教程</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e6e6e6;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 2px solid #3498db;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            color: #3498db;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #4cc9f0, #4361ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0a0c0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .card-title i {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            color: #3498db;
+            background: rgba(52, 152, 219, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #4cc9f0;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 20px 0 15px;
+            color: #64dfdf;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            color: #d0d0e0;
+        }
+        
+        .highlight {
+            background: rgba(64, 145, 208, 0.2);
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .step-container {
+            display: flex;
+            margin-bottom: 25px;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #4361ee, #4cc9f0);
+            color: white;
+            font-size: 1.8rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+        
+        .step-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            flex-grow: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #4361ee, #3a0ca3);
+            color: white;
+            padding: 14px 28px;
+            font-size: 1.05rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(58, 12, 163, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(58, 12, 163, 0.6);
+        }
+        
+        .faq-list {
+            list-style-type: none;
+        }
+        
+        .faq-list li {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #7209b7;
+        }
+        
+        .faq-list li h3 {
+            display: flex;
+            align-items: center;
+            margin-top: 0;
+        }
+        
+        .faq-list li h3 i {
+            margin-right: 10px;
+            color: #f72585;
+        }
+        
+        .image-placeholder {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #3a0ca3, #4361ee);
+            border-radius: 10px;
+            height: 250px;
+            margin: 25px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-placeholder:before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(30deg);
+        }
+        
+        .image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+        
+        .image-placeholder span {
+            font-size: 1.2rem;
+            z-index: 2;
+            font-weight: 500;
+        }
+        
+        .note {
+            background: rgba(241, 196, 15, 0.1);
+            border-left: 4px solid #f1c40f;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            color: #f1c40f;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            color: #a0a0c0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .step-container {
+                flex-direction: column;
+            }
+            
+            .step-number {
+                margin: 0 auto 15px;
+            }
+            
+            .step-content {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+            </div>
+            <h1>游戏插件使用教程</h1>
+            <p class="subtitle">详细步骤指南，助您顺利使用游戏修改工具</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-info-circle"></i>
+                <h2>准备工作：账号注册与准备</h2>
+            </div>
+            
+            <div class="step-container">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>账号注册</h3>
+                    <p>在使用之前需要先行注入一个iOSGods论坛的账号，这是必须的。这一步大约需要<strong>3分钟</strong>时间。</p>
+                    <p>请点击下方按钮进行注册：</p>
+                    <a href="https://iosgods.com/register/" class="btn">
+                        <i class="fas fa-external-link-alt"></i> 访问注册页面
+                    </a>
+                </div>
+            </div>
+            
+            <div class="highlight">
+                <p><i class="fas fa-question-circle"></i> <strong>为什么要使用iOSGods？</strong></p>
+                <p>iOSGods论坛是历史悠久的专业游戏论坛，我们所使用的H5GG、iGG等修改器工具都由该论坛制作开发。新版的修改器工具需要登陆才能使用，因此注册账号是必要的步骤。</p>
+            </div>
+            
+            <div class="step-container">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>论坛语言设置</h3>
+                    <p>iOSGods是国外论坛，界面默认为英文。如果您使用的是Safari浏览器：</p>
+                    <ul style="margin-left: 20px; margin-bottom: 15px;">
+                        <li>使用Safari自带的翻译功能</li>
+                        <li>参考下方中文界面对照表辅助注册</li>
+                    </ul>
+                    
+                    <div class="image-placeholder">
+                        <i class="fas fa-images"></i>
+                        <span><img src="/images/duizhao.png" alt="iOSGods中文对照表">iOSGods中文对照表</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-play-circle"></i>
+                <h2>使用教程：启动与登录</h2>
+            </div>
+            
+            <div class="step-container">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>登录插件</h3>
+                    <p>注入账号成功后，按照以下步骤：</p>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>启动游戏</li>
+                        <li>在弹出的窗口中点击<strong>"Thank you"</strong>按钮</li>
+                        <li>在登录页面输入之前注入的账号和密码</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="note">
+                <p><i class="fas fa-lightbulb"></i> <strong>重要提示：</strong>首次登录成功后，后续启动其他游戏时，点击"Thank you"会自动进入插件界面，无需重复登录！</p>
+            </div>
+            
+            <div class="image-placeholder">
+                <i class="fas fa-window-restore"></i>
+                <span>插件登录界面示意图</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h2>常见问题解答</h2>
+            </div>
+            
+            <ul class="faq-list">
+                <li>
+                    <h3><i class="fas fa-key"></i> 1. 账号忘记了怎么办？</h3>
+                    <p>重新注册一个新账号会更快更简单，占用时间也更少。</p>
+                </li>
+                <li>
+                    <h3><i class="fas fa-ban"></i> 2. 账号被iOSGods论坛错误封禁怎么办？</h3>
+                    <p>按以下步骤操作解除封禁状态：</p>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>打开Safari浏览器</li>
+                        <li>进入iOSGods网站</li>
+                        <li>清除网站缓存数据</li>
+                        <li>重新登录尝试</li>
+                    </ol>
+                    <div class="image-placeholder" style="height: 180px; margin-top: 15px;">
+                        <i class="fas fa-trash-alt"></i>
+                        <span><img src="/images/yanshi.png" alt="清除演示">清除演示</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p><i class="far fa-copyright"></i> 2025 游戏插件使用指南 • 本教程仅用于学习交流目的</p>
+            <p style="margin-top: 10px;">遇到问题？请加入<a href="https://qm.qq.com/cgi-bin/qm/qr?k=7I2_e-2czadI3gG97EIGh0f-oGFfiFbu&jump_from=webapi&authKey=pVhfQqFOCytiNLwiDiCrh1SGYG8BOZnA0TxKTn288JXnQObJYtyNFV9rkJqwK2Ar">QQ群</a>获取最新支持</p>
+        </div>
+    </div>
+
+    <script>
+        // 为卡片添加动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach((card, index) => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = 1;
+                    card.style.transform = 'translateY(0)';
+                }, 300 + index * 150);
+            });
+            
+            // 按钮悬停效果增强
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', function() {
+                    this.style.background = 'linear-gradient(to right, #3a0ca3, #4361ee)';
+                });
+                
+                button.addEventListener('mouseout', function() {
+                    this.style.background = 'linear-gradient(to right, #4361ee, #3a0ca3)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
